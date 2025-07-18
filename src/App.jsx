@@ -1,15 +1,13 @@
-import Header from "./components/Header";
-import Banner from './components/Banner';
-import PostList from "./components/PostList";
+// App.jsx
+import { Routes, Route } from "react-router-dom";
+import IdeasPage from "./pages/Ideas";
 
-function App() {
+const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header />
-      <Banner />
-      <PostList />
-    </div>
+      <Routes>
+        <Route path="/" element={<IdeasPage />} />
+      </Routes>
   );
-}
+};
 
 export default App;

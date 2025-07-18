@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 
 const PostCard = ({ post }) => {
-  const imageUrl = post.small_image?.url;
+  const imageUrl = post.small_image?.[0]?.url;
   const title = post.title;
   const publishedDate = new Date(post.published_at);
-
   const formattedDate = publishedDate.toLocaleDateString("id-ID", {
     day: "numeric",
     month: "long",
@@ -29,9 +28,14 @@ const PostCard = ({ post }) => {
 
 PostCard.propTypes = {
   post: PropTypes.shape({
-    small_image: PropTypes.shape({
-      url: PropTypes.string,
-    }),
+    small_image: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.arrayOf(
+        PropTypes.shape({
+          url: PropTypes.string,
+        })
+      ),
+    ]),
     title: PropTypes.string.isRequired,
     published_at: PropTypes.string.isRequired,
   }).isRequired,
